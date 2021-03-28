@@ -1,6 +1,3 @@
-/**
- * Action Types
- */
 export enum HeroesTypes {
   GET_HEROES_REQUEST = '@users/GET_HEROES_REQUEST',
   GET_HEROES_SUCCESS = '@users/GET_HEROES_SUCCESS',

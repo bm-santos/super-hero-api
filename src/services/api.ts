@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseApiURL = "https://superheroapi.com/api/3597642667020542/search"
+const baseApiURL = "https://superheroapi.com/api.php/3597642667020542/"
 
 const api = axios.create({
     baseURL: baseApiURL
