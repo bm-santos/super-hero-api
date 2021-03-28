@@ -1,16 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux'
+import React from 'react';
 import Search from '../../components/Search';
 import Results from '../../components/Results';
-import CenteredTabs from '../../components/Header';
 import Grid, { GridSpacing } from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import toast, { Toaster } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,38 +24,26 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Heroes = () => {
 
-  const { loading } = useSelector((state: any) => state.heroes)
-  const [spacing, setSpacing] = React.useState<GridSpacing>(2);
+  const [spacing] = React.useState<GridSpacing>(2);
   const classes = useStyles();
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSpacing(Number((event.target as HTMLInputElement).value) as GridSpacing);
-  };
+  const { heroesObject } = useSelector((state: any) => state.heroes)
 
   return (
     <>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          loading: {
-            duration: 10,
-          },
-        }} />
-      { loading && toast.loading("Searching...")}
+      <Search />
+      {
+        heroesObject?.length > 0 &&
+        <div>
+          <strong>Heroes: </strong><span>{heroesObject.length}</span>
+        </div>
+      }
       <Grid container className={classes.root} spacing={6}>
         <Grid item lg={12}>
           <Grid container justify="center" spacing={spacing}>
-            <Search /><br />
             <Results />
           </Grid>
         </Grid>
       </Grid>
-
-
     </>
   );
 }
